@@ -1,0 +1,99 @@
+#:kivy 1.0.9
+
+ScrollViewFixedAR:
+    panel: panel_id
+    top_view: top_view_id
+    bottom_view: bottom_view_id
+    pyramid: pyramid_id
+    grid: grid_id
+
+    FloatLayout:
+        id: panel_id
+        aspect_ratio: 16.0/18.0
+
+        canvas:
+            Color:
+                rgb: 0.2, 0.2, 0.2
+            Rectangle:
+                size: self.size
+                pos: 0, 0
+
+        RelativeLayout:
+            id: top_view_id
+            aspect_ratio: 16.0/9.0
+
+            pos_hint: {'x':0, 'top':1.0}
+
+            size_hint_x: 1
+            size_hint_y: 1/(self.aspect_ratio/panel_id.aspect_ratio)
+
+            #canvas:
+            #    Color:
+            #        rgb: 0.4, 0, 0
+            #    Rectangle:
+            #        size: self.size
+            #        pos: 0, 0
+
+            RelativeLayout:
+                id: pyramid_id
+                top_margin: 0.03
+
+                spacing: 1.1
+                v_space: 1.0 / (7.0 + self.spacing)
+                h_space: 2*self.v_space*0.577350269/self.aspect_ratio
+                result_height: self.spacing*self.v_space
+
+                pos_hint: {'center_x':0.5, 'center_y':0.5}
+
+                size_hint_x: 1.0-2*self.top_margin/top_view_id.aspect_ratio
+                size_hint_y: 1.0-2*self.top_margin
+
+                aspect_ratio: self.size_hint_x / self.size_hint_y * top_view_id.aspect_ratio
+
+                #canvas:
+                #    Color:
+                #        rgb: 0.2, 0, 0
+                #    Rectangle:
+                #        size: self.size
+                #        pos: 0, 0
+
+        RelativeLayout:
+            id: bottom_view_id
+            aspect_ratio: 16.0/9.0
+
+            pos_hint: {'x':0, 'top':0.5}
+
+            size_hint_x: 1
+            size_hint_y: 1/(self.aspect_ratio/panel_id.aspect_ratio)
+
+            RelativeLayout:
+                id: grid_id
+                top_margin: 0.03
+
+                pos_hint: {'center_x':0.5, 'center_y':0.5}
+
+                size_hint_x: 1.0-2*self.top_margin/bottom_view_id.aspect_ratio
+                size_hint_y: 1.0-2*self.top_margin
+
+                aspect_ratio: self.size_hint_x / self.size_hint_y * bottom_view_id.aspect_ratio
+
+                #line_width:4
+                #start_x: (0.5 - 4.0*root.pyramid.h_space)*self.width
+
+                #canvas:
+                #    Color:
+                #        rgb: 0.8, 0.8, 0.8
+                #    Rectangle:
+                #        size: self.size
+                #        pos: 0, 0
+                #    Line:
+                #        width:self.line_width
+                #        cap:'round'
+                #        joint:'round'
+                #        points:(self.start_x,200,grid_id.width,400)
+
+
+
+<PotionSetGraphic>:
+    size_hint_x: app.root.pyramid.result_height/app.root.pyramid.aspect_ratio
+    size_hint_y: app.root.pyramid.result_height
