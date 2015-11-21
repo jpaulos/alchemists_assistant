@@ -1,0 +1,11 @@
+<svg height="114" width="100">
+  <polygon points="4,103 4,39 50,4 96,39 96,103" stroke-linejoin="round"
+    style="fill:white; stroke:black; stroke-width:8" />
+</svg>
+
+<!-- 
+  thin line shape of width (radius) R has coordinates
+  1/sqrt(3) and 2/sqrt(3) down from top.
+
+  ensure center of inscrived circle remains at center of image
+-->

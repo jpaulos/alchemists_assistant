@@ -59,7 +59,7 @@ class ScrollViewFixedAR(ScrollView, Layout):
 class PotionSetGraphic(ButtonBehavior, Image, FloatLayout):
   # A PotionSetGraphic is the graphic representation of a list of possible potions.
   def __init__(self, *args, **kwargs):
-    kwargs['source'] = 'unknown.png'
+    kwargs['source'] = '../img/unknown.png'
     kwargs['allow_stretch'] = True
     super(PotionSetGraphic, self).__init__(*args, **kwargs)
 
@@ -72,11 +72,11 @@ class PotionSetGraphic(ButtonBehavior, Image, FloatLayout):
 
     if np.sum(active_colors) == 4:
       # grey unknown marker if all four colors are possible
-      self.source = 'unknown.png'
+      self.source = '../img/unknown.png'
     else:
       # colored marker if colors narrowed down to three or fewer
       colorlist = ['red','green','blue','neutral']
-      filename = ''
+      filename = '../img/'
       for c in range(0,4):
         if active_colors[c]:
           filename = filename + colorlist[c] + '_'
@@ -94,10 +94,10 @@ class PotionSetGraphic(ButtonBehavior, Image, FloatLayout):
         y = pos_radius * math.sin(math.radians(label_angles[tuple(active_colors)][k]))
         pos_hint = pos_hint={'center_x':0.5+x,'center_y':0.5+y}
         if minus[k]:
-          label = Image(source='minus.png', size_hint=(size,size), pos_hint=pos_hint)
+          label = Image(source='../img/minus.png', size_hint=(size,size), pos_hint=pos_hint)
           self.add_widget(label)
         elif plus[k]:
-          label = Image(source='plus.png', size_hint=(size,size), pos_hint=pos_hint)
+          label = Image(source='../img/plus.png', size_hint=(size,size), pos_hint=pos_hint)
           self.add_widget(label)
 
 
@@ -135,7 +135,7 @@ class Ingredient(ButtonBehavior, Image):
       rgba.append((x[0],x[1],x[2],1))
 
     kwargs['color'] = rgba[self.label]
-    kwargs['source'] = 'ingredient.png'
+    kwargs['source'] = '../img/ingredient.png'
     kwargs['allow_stretch'] = True
     super(Ingredient, self).__init__(*args, **kwargs)
     self.bind(on_press=ingredient_callback)
@@ -146,13 +146,13 @@ class Ingredient(ButtonBehavior, Image):
 class Labeling(Image):
   def __init__(self, *args, **kwargs):
     kwargs['color'] = (0.2,0.2,0.2,1.0)
-    kwargs['source'] = 'white_rect.png'
+    kwargs['source'] = '../img/white_rect.png'
     kwargs['allow_stretch'] = True
     self.formula = kwargs['formula']
     self.ingredient = kwargs['ingredient']
     super(Labeling, self).__init__(*args, **kwargs)
   def mark_false(self):
-    self.source = 'red.png'
+    self.source = '../img/red.png'
 
 
 
